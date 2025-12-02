@@ -2,7 +2,7 @@ from google_play_scraper import Sort, reviews
 import pandas as pd
 
 apps = {
-    "CBE": "com.cbe.mobilebanking",
+    "CBE": "com.combanketh.mobilebanking",
     "BOA": "boa.et.mobilebanking",
     "Abyssinia": "com.bankofabyssinia.mobilebanking"
 }
@@ -12,8 +12,6 @@ all_reviews = []
 for bank, app_id in apps.items():
     result, _ = reviews(
         app_id,
-        lang='en',
-        country='us',
         sort=Sort.NEWEST,
         count=500
     )
@@ -23,8 +21,7 @@ for bank, app_id in apps.items():
             "review": r["content"],
             "rating": r["score"],
             "date": r["at"],
-            "bank": bank,
-            "source": "Google Play"
+            "bank": bank
         })
 
 df = pd.DataFrame(all_reviews)
